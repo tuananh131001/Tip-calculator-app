@@ -15,7 +15,7 @@ export default function Card() {
           </svg>
           <input
             type="text"
-            className="bg-lightGrayishCyan items-stretch pr-32 h-10 before:bg-dollar-pattern"
+            className="bg-lightGrayishCyan items-stretch w-choSir h-10 before:bg-dollar-pattern"
           />
         </div>
 
