@@ -8,13 +8,17 @@ module.exports = {
       xl: "1440px",
     },
     width: {
-      '3ch': '3ch',
-      '4ch': '4ch',
-      '5ch': '5ch',
-      '7ch': '7ch',
-      "choSir":'100%',
+      "3ch": "3ch",
+      "4ch": "4ch",
+      "5ch": "5ch",
+      "7ch": "7ch",
+      choSir: "100%",
     },
+
     extend: {
+      backgroundImage: {
+        "dollar-pattern": "url('/src/images/icon-dollar.svg')",
+      },
       colors: {
         strongCyan: "hsl(172, 67%, 45%)",
         veryDarkCyan: "hsl(183, 100%, 15%)",
