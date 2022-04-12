@@ -12,6 +12,7 @@ module.exports = {
       '4ch': '4ch',
       '5ch': '5ch',
       '7ch': '7ch',
+      "choSir":'100%',
     },
     extend: {
       colors: {
