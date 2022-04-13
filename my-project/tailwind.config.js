@@ -16,9 +16,10 @@ module.exports = {
     },
 
     extend: {
-      backgroundImage: {
-        "dollar-pattern": "url('/src/images/icon-dollar.svg')",
-      },
+      content: (theme) => ({
+        "dollar-pattern": "url('../src/images/icon-dollar.svg')",
+        "person-pattern": "url('../src/images/icon-person.svg')",
+      }),
       colors: {
         strongCyan: "hsl(172, 67%, 45%)",
         veryDarkCyan: "hsl(183, 100%, 15%)",

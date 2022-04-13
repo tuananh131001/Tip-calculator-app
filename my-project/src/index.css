@@ -4,11 +4,17 @@
 
 body {
   margin: 0;
-  font-family: 'Overpass', sans-serif;
+  font-family: 'Space Mono', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: 'Overpass', sans-serif;
+  font-family: 'Space Mono', monospace;
+}
+
+@layer components{
+  .button-per{
+    @apply hover:bg-lightGrayishCyan hover:text-veryDarkCyan p-3 font-extrabold rounded-md bg-veryDarkCyan text-white text-2xl;
+  }
 }
