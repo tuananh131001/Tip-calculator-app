@@ -1,10 +1,13 @@
 import React from "react";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function Card() {
-  const [amount, setAmount] = useState("0.00");
+  const [amount, setAmount] = useState("0");
   const [people, setPeople] = useState(0);
-
+  const [tip, setTip] = useState(0);
+  const chooseTip = (e) => {
+    setTip(parseInt(e.target.value));
+  };
   return (
     <div
       className="
@@ -29,9 +32,9 @@ export default function Card() {
             </svg>
 
             <input
-              type="text"
+              type="number"
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => setAmount(parseInt(e.target.value))}
               className=" before:bg-dollar-pattern h-14 w-choSir bg-veryLightGrayishGyan pr-2 text-right text-2xl font-extrabold text-veryDarkCyan "
             />
           </span>
@@ -39,12 +42,25 @@ export default function Card() {
         <section className=" flex flex-col gap-5 text-2xl">
           <h1 className="font-bold text-darkGrayishCyan">Select Tip %</h1>
           <div className="select-tip grid grid-cols-2 gap-3 lg:grid-cols-3">
-            <button className="button-per">5%</button>
-            <button className="button-per">10%</button>
-            <button className="button-per">15%</button>
-            <button className="button-per">25%</button>
-            <button className="button-per">50%</button>
-            <button className="rounded-md bg-veryLightGrayishGyan p-3 text-2xl font-extrabold text-darkGrayishCyan">
+            <button value={5} className="button-per" onClick={chooseTip}>
+              5%
+            </button>
+            <button value={10} className="button-per" onClick={chooseTip}>
+              10%
+            </button>
+            <button value={15} className="button-per" onClick={chooseTip}>
+              15%
+            </button>
+            <button value={25} className="button-per" onClick={chooseTip}>
+              25%
+            </button>
+            <button value={50} className="button-per" onClick={chooseTip}>
+              50%
+            </button>
+            <button
+              value={100}
+              className="onClick={chooseTip} rounded-md bg-veryLightGrayishGyan p-3 text-2xl font-extrabold text-darkGrayishCyan"
+            >
               Custom
             </button>
           </div>
@@ -65,10 +81,10 @@ export default function Card() {
               />
             </svg>
             <input
-              type="text"
+              type="number"
               placeholder="0"
               value={people}
-              onChange={(e) => setPeople(e.target.value)}
+              onChange={(e) => setPeople(parseInt(e.target.value))}
               className=" before:bg-dollar-pattern h-16 w-choSir bg-veryLightGrayishGyan pr-2 text-right text-2xl font-extrabold text-veryDarkCyan "
             />
           </span>
@@ -84,7 +100,9 @@ export default function Card() {
               <h2 className="font-bold text-darkGrayishCyan">/ person</h2>
             </div>
             <div className="right text-4xl font-bold text-strongCyan ">
-              ${amount}
+              $
+              {parseFloat(amount) +
+                (parseFloat(amount) * parseFloat(tip)) / 100}
             </div>
           </div>
           <div className="total flex items-center justify-between">
@@ -92,13 +110,13 @@ export default function Card() {
               <h1 className="font-bold text-white">Total</h1>
               <h2 className="font-bold text-darkGrayishCyan">/ person</h2>
             </div>
-            {(isNaN(amount / people) || people == 0)? (
+            {isNaN(amount / people) || people == 0 ? (
               <div className="right text-4xl font-bold text-strongCyan">
                 $0.00
               </div>
             ) : (
               <div className="right text-4xl font-bold text-strongCyan">
-                {(amount / people).toFixed(2)} 
+                ${(amount / people).toFixed(2)}
               </div>
             )}
           </div>

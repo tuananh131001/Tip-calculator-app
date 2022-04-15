@@ -17,4 +17,7 @@ code {
   .button-per{
     @apply hover:bg-lightGrayishCyan hover:text-veryDarkCyan p-3 font-extrabold rounded-md bg-veryDarkCyan text-white text-2xl;
   }
+  .active{
+    @apply bg-white text-veryDarkCyan;
+  }
 }

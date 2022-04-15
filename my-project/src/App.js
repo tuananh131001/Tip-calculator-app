@@ -6,7 +6,7 @@ function App() {
     <>
       {" "}
       <div className=" h-screen bg-lightGrayishCyan lg:grid lg:place-content-center ">
-        <div className="heading flex h-1/6 items-center justify-center pt-5">
+        <div className="heading flex items-center justify-center">
           <h1 className="w-5ch break-words text-center font-extrabold text-veryDarkCyan">
             <svg>
               <svg xmlns="http://www.w3.org/2000/svg" width="87" height="54">
