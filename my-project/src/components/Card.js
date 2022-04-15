@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState, useRef } from "react";
+import {  useState } from "react";
 
 export default function Card() {
   const [amount, setAmount] = useState("0");
@@ -8,10 +8,15 @@ export default function Card() {
   const chooseTip = (e) => {
     setTip(parseInt(e.target.value));
   };
+  const resetAll = (e) => {
+    setTip(0);
+    setPeople(0);
+    setAmount(0);
+  };
   return (
     <div
       className="
-      lg:max-w-screen-2xl grid h-5/6 grid-cols-1 rounded-3xl bg-white p-12
+      lg:max-w-screen-lg gap-9 grid h-5/6 grid-cols-1 rounded-3xl bg-white p-12
      lg:h-full lg:grid-cols-2 lg:gap-9"
     >
       {/* Calcullator part */}
@@ -57,12 +62,11 @@ export default function Card() {
             <button value={50} className="button-per" onClick={chooseTip}>
               50%
             </button>
-            <button
-              value={100}
-              className="onClick={chooseTip} rounded-md bg-veryLightGrayishGyan p-3 text-2xl font-extrabold text-darkGrayishCyan"
-            >
-              Custom
-            </button>
+            <input type="number"
+            placeholder="Custom"
+            className= " text-center rounded-md bg-veryLightGrayishGyan p-3 text-2xl font-extrabold text-darkGrayishCyan"
+            onChange={chooseTip}>
+            </input>
           </div>
         </section>
 
@@ -110,20 +114,29 @@ export default function Card() {
               <h1 className="font-bold text-white">Total</h1>
               <h2 className="font-bold text-darkGrayishCyan">/ person</h2>
             </div>
-            {isNaN(amount / people) || people == 0 ? (
+            {isNaN(
+              (parseFloat(amount) +
+                (parseFloat(amount) * parseFloat(tip)) / 100) /
+                people
+            ) || people == 0 ? (
               <div className="right text-4xl font-bold text-strongCyan">
                 $0.00
               </div>
             ) : (
               <div className="right text-4xl font-bold text-strongCyan">
-                ${(amount / people).toFixed(2)}
+                $
+                {(
+                  (parseFloat(amount) +
+                    (parseFloat(amount) * parseFloat(tip)) / 100) /
+                  people
+                ).toFixed(2)}
               </div>
             )}
           </div>
         </section>
         {/* Reset button */}
         <div className="reset w-full rounded-md bg-grayishCyan py-3 text-center ">
-          <button className=" w-full bg-grayishCyan text-xl font-extrabold text-veryDarkCyan ">
+          <button onClick={resetAll} className=" w-full bg-grayishCyan text-xl font-extrabold text-veryDarkCyan ">
             RESET
           </button>
         </div>
