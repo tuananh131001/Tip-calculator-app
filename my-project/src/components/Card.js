@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 export default function Card() {
-  const [amount, setAmount] = useState("0");
+  const [amount, setAmount] = useState(null);
   const [people, setPeople] = useState(null);
   const [tip, setTip] = useState(0);
   const chooseTip = (e) => {
@@ -102,7 +102,7 @@ export default function Card() {
           <>
             {parseInt(people) !== 0 ? (
               <>
-                <h1 className="font-bold text-darkGrayishCyan">
+                <h1 className="  font-bold text-darkGrayishCyan">
                   Number of people
                 </h1>
                 <span className="relative inset-y-0 left-0 flex items-center">
@@ -129,10 +129,10 @@ export default function Card() {
             ) : (
               <>
                 <div className=" flex justify-between">
-                  <h1 className="font-bold text-darkGrayishCyan">
+                  <h1 className="text-xl font-bold text-darkGrayishCyan">
                     Number of people
                   </h1>
-                  <h1 className="text-red-500">Can't be zero</h1>
+                  <h1 className="text-xl text-red-500">Can't be zero</h1>
                 </div>
                 <span className="relative inset-y-0 left-0 flex items-center">
                   <svg
@@ -169,9 +169,25 @@ export default function Card() {
               <h2 className="font-bold text-darkGrayishCyan">/ person</h2>
             </div>
             <div className="right text-4xl font-bold text-strongCyan ">
-              $
-              {parseFloat(amount) +
-                (parseFloat(amount) * parseFloat(tip)) / 100}
+              {amount === 0 ||
+              isNaN(
+                (parseFloat(amount) +
+                  (parseFloat(amount) * parseFloat(tip)) / 100) /
+                  people
+              ) ||
+              (
+                (parseFloat(amount) +
+                  (parseFloat(amount) * parseFloat(tip)) / 100) /
+                people
+              ).toFixed(2) === "Infinity" ? (
+                <div> $0.00 </div>
+              ) : (
+                <div>
+                  $
+                  {parseFloat(amount) +
+                    (parseFloat(amount) * parseFloat(tip)) / 100}
+                </div>
+              )}
             </div>
           </div>
           <div className="total flex items-center justify-between">
@@ -183,7 +199,13 @@ export default function Card() {
               (parseFloat(amount) +
                 (parseFloat(amount) * parseFloat(tip)) / 100) /
                 people
-            ) || people == 0 ? (
+            ) ||
+            (
+              (parseFloat(amount) +
+                (parseFloat(amount) * parseFloat(tip)) / 100) /
+              people
+            ).toFixed(2) === "Infinity" ||
+            people === 0 ? (
               <div className="right text-4xl font-bold text-strongCyan">
                 $0.00
               </div>
