@@ -1,23 +1,30 @@
 import React from "react";
-import {  useState } from "react";
+import { useState } from "react";
 
 export default function Card() {
   const [amount, setAmount] = useState("0");
-  const [people, setPeople] = useState(0);
+  const [people, setPeople] = useState(null);
   const [tip, setTip] = useState(0);
   const chooseTip = (e) => {
     setTip(parseInt(e.target.value));
+    e.target.focus();
   };
   const resetAll = (e) => {
     setTip(0);
     setPeople(0);
     setAmount(0);
   };
+  const checkZero = (e) => {
+    people <= 0
+      ? e.target.classList.add("error")
+      : e.target.classList.remove("error");
+    setPeople(parseInt(e.target.value));
+  };
   return (
     <div
       className="
-      lg:max-w-screen-lg gap-9 grid h-5/6 grid-cols-1 rounded-3xl bg-white p-12
-     lg:h-full lg:grid-cols-2 lg:gap-9"
+      grid h-5/6 grid-cols-1 gap-9 rounded-3xl bg-white p-12 lg:h-full
+     lg:max-w-screen-lg lg:grid-cols-2 lg:gap-9"
     >
       {/* Calcullator part */}
       <div className="flex flex-col gap-9 text-2xl">
@@ -40,58 +47,116 @@ export default function Card() {
               type="number"
               value={amount}
               onChange={(e) => setAmount(parseInt(e.target.value))}
-              className=" before:bg-dollar-pattern h-14 w-choSir bg-veryLightGrayishGyan pr-2 text-right text-2xl font-extrabold text-veryDarkCyan "
+              className="before:bg-dollar-pattern h-14 w-choSir bg-veryLightGrayishGyan pr-2 text-right text-2xl font-extrabold text-veryDarkCyan hover:outline-darkGrayishCyan focus:outline-darkGrayishCyan "
             />
           </span>
         </section>
         <section className=" flex flex-col gap-5 text-2xl">
           <h1 className="font-bold text-darkGrayishCyan">Select Tip %</h1>
           <div className="select-tip grid grid-cols-2 gap-3 lg:grid-cols-3">
-            <button value={5} className="button-per" onClick={chooseTip}>
+            <button
+              value={5}
+              className="button-per focus:bg-lightGrayishCyan focus:text-black"
+              onClick={chooseTip}
+            >
               5%
             </button>
-            <button value={10} className="button-per" onClick={chooseTip}>
+            <button
+              value={10}
+              className="button-per focus:bg-lightGrayishCyan focus:text-black"
+              onClick={chooseTip}
+            >
               10%
             </button>
-            <button value={15} className="button-per" onClick={chooseTip}>
+            <button
+              value={15}
+              className="button-per focus:bg-lightGrayishCyan focus:text-black"
+              onClick={chooseTip}
+            >
               15%
             </button>
-            <button value={25} className="button-per" onClick={chooseTip}>
+            <button
+              value={25}
+              className="button-per focus:bg-lightGrayishCyan focus:text-black"
+              onClick={chooseTip}
+            >
               25%
             </button>
-            <button value={50} className="button-per" onClick={chooseTip}>
+            <button
+              value={50}
+              className="button-per focus:bg-lightGrayishCyan focus:text-black"
+              onClick={chooseTip}
+            >
               50%
             </button>
-            <input type="number"
-            placeholder="Custom"
-            className= " text-center rounded-md bg-veryLightGrayishGyan p-3 text-2xl font-extrabold text-darkGrayishCyan"
-            onChange={chooseTip}>
-            </input>
+            <input
+              type="number"
+              placeholder="Custom"
+              className=" rounded-md bg-veryLightGrayishGyan p-3 text-center text-2xl font-extrabold text-darkGrayishCyan"
+              onChange={chooseTip}
+            ></input>
           </div>
         </section>
 
         <section className="flex flex-col gap-5">
-          <h1 className="font-bold text-darkGrayishCyan">Number of people</h1>
-          <span className="relative inset-y-0 left-0 flex items-center">
-            <svg
-              className="absolute ml-5"
-              xmlns="http://www.w3.org/2000/svg"
-              width="13"
-              height="16"
-            >
-              <path
-                fill="#9EBBBD"
-                d="M9.573 7.729c.406 0 .784.07 1.126.209.342.14.639.33.881.569.232.227.438.503.614.82a5.1 5.1 0 01.407.949c.097.312.178.654.242 1.016.062.359.105.699.126 1.011.02.307.031.624.031.945 0 .836-.259 1.512-.768 2.01-.504.492-1.17.742-1.98.742H2.748c-.81 0-1.477-.25-1.98-.742C.259 14.76 0 14.084 0 13.248c0-.322.01-.64.032-.945.02-.312.063-.652.126-1.01.063-.363.144-.705.242-1.017.1-.323.238-.643.407-.948.176-.318.382-.594.613-.821.243-.238.54-.43.882-.57.342-.138.72-.208 1.125-.208.16 0 .313.067.61.265.183.123.397.264.636.421.204.134.48.259.822.372.333.11.671.167 1.005.167a3.19 3.19 0 001.006-.167c.341-.113.618-.238.822-.372l.636-.42c.296-.2.45-.266.61-.266zM6.598 0C7.63 0 8.522.38 9.252 1.129s1.1 1.666 1.1 2.724c0 1.06-.37 1.976-1.1 2.725-.73.75-1.623 1.13-2.654 1.13-1.03 0-1.924-.38-2.653-1.13-.73-.749-1.1-1.666-1.1-2.725 0-1.058.37-1.975 1.1-2.724C4.675.379 5.567 0 6.598 0z"
-              />
-            </svg>
-            <input
-              type="number"
-              placeholder="0"
-              value={people}
-              onChange={(e) => setPeople(parseInt(e.target.value))}
-              className=" before:bg-dollar-pattern h-16 w-choSir bg-veryLightGrayishGyan pr-2 text-right text-2xl font-extrabold text-veryDarkCyan "
-            />
-          </span>
+          <>
+            {parseInt(people) !== 0 ? (
+              <>
+                <h1 className="font-bold text-darkGrayishCyan">
+                  Number of people
+                </h1>
+                <span className="relative inset-y-0 left-0 flex items-center">
+                  <svg
+                    className="absolute ml-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="16"
+                  >
+                    <path
+                      fill="#9EBBBD"
+                      d="M9.573 7.729c.406 0 .784.07 1.126.209.342.14.639.33.881.569.232.227.438.503.614.82a5.1 5.1 0 01.407.949c.097.312.178.654.242 1.016.062.359.105.699.126 1.011.02.307.031.624.031.945 0 .836-.259 1.512-.768 2.01-.504.492-1.17.742-1.98.742H2.748c-.81 0-1.477-.25-1.98-.742C.259 14.76 0 14.084 0 13.248c0-.322.01-.64.032-.945.02-.312.063-.652.126-1.01.063-.363.144-.705.242-1.017.1-.323.238-.643.407-.948.176-.318.382-.594.613-.821.243-.238.54-.43.882-.57.342-.138.72-.208 1.125-.208.16 0 .313.067.61.265.183.123.397.264.636.421.204.134.48.259.822.372.333.11.671.167 1.005.167a3.19 3.19 0 001.006-.167c.341-.113.618-.238.822-.372l.636-.42c.296-.2.45-.266.61-.266zM6.598 0C7.63 0 8.522.38 9.252 1.129s1.1 1.666 1.1 2.724c0 1.06-.37 1.976-1.1 2.725-.73.75-1.623 1.13-2.654 1.13-1.03 0-1.924-.38-2.653-1.13-.73-.749-1.1-1.666-1.1-2.725 0-1.058.37-1.975 1.1-2.724C4.675.379 5.567 0 6.598 0z"
+                    />
+                  </svg>
+                  <input
+                    type="number"
+                    placeholder="0"
+                    value={people}
+                    onChange={checkZero}
+                    className="before:bg-dollar-pattern h-16 w-choSir bg-veryLightGrayishGyan pr-2 text-right text-2xl font-extrabold text-veryDarkCyan "
+                  />
+                </span>
+              </>
+            ) : (
+              <>
+                <div className=" flex justify-between">
+                  <h1 className="font-bold text-darkGrayishCyan">
+                    Number of people
+                  </h1>
+                  <h1 className="text-red-500">Can't be zero</h1>
+                </div>
+                <span className="relative inset-y-0 left-0 flex items-center">
+                  <svg
+                    className="absolute ml-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="16"
+                  >
+                    <path
+                      fill="#9EBBBD"
+                      d="M9.573 7.729c.406 0 .784.07 1.126.209.342.14.639.33.881.569.232.227.438.503.614.82a5.1 5.1 0 01.407.949c.097.312.178.654.242 1.016.062.359.105.699.126 1.011.02.307.031.624.031.945 0 .836-.259 1.512-.768 2.01-.504.492-1.17.742-1.98.742H2.748c-.81 0-1.477-.25-1.98-.742C.259 14.76 0 14.084 0 13.248c0-.322.01-.64.032-.945.02-.312.063-.652.126-1.01.063-.363.144-.705.242-1.017.1-.323.238-.643.407-.948.176-.318.382-.594.613-.821.243-.238.54-.43.882-.57.342-.138.72-.208 1.125-.208.16 0 .313.067.61.265.183.123.397.264.636.421.204.134.48.259.822.372.333.11.671.167 1.005.167a3.19 3.19 0 001.006-.167c.341-.113.618-.238.822-.372l.636-.42c.296-.2.45-.266.61-.266zM6.598 0C7.63 0 8.522.38 9.252 1.129s1.1 1.666 1.1 2.724c0 1.06-.37 1.976-1.1 2.725-.73.75-1.623 1.13-2.654 1.13-1.03 0-1.924-.38-2.653-1.13-.73-.749-1.1-1.666-1.1-2.725 0-1.058.37-1.975 1.1-2.724C4.675.379 5.567 0 6.598 0z"
+                    />
+                  </svg>
+                  <input
+                    type="number"
+                    placeholder="0"
+                    value={people}
+                    onChange={checkZero}
+                    className="before:bg-dollar-pattern h-16 w-choSir bg-veryLightGrayishGyan pr-2 text-right text-2xl font-extrabold text-veryDarkCyan focus:outline-red-400  "
+                  />
+                </span>
+              </>
+            )}
+          </>
         </section>
       </div>
       {/* Result Part */}
@@ -136,7 +201,10 @@ export default function Card() {
         </section>
         {/* Reset button */}
         <div className="reset w-full rounded-md bg-grayishCyan py-3 text-center ">
-          <button onClick={resetAll} className=" w-full bg-grayishCyan text-xl font-extrabold text-veryDarkCyan ">
+          <button
+            onClick={resetAll}
+            className=" w-full bg-grayishCyan text-xl font-extrabold text-veryDarkCyan "
+          >
             RESET
           </button>
         </div>
